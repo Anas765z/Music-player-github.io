@@ -9,7 +9,7 @@ import ddf.minim.ugens.*;
 //
 //Library - Minim
 Minim minim;
-AudioPlayer[] playList = new AudioPlayer[2]; // Array to hold two songs
+AudioPlayer[] playList; // Adjust array size to hold two songs
 int currentSongIndex = 0; // Index of the currently playing song
 //
 //Global Variables
@@ -60,8 +60,9 @@ void setup() {
   //Prototype Images
   // Initialize Minim
   minim = new Minim(this);
+  playList = new AudioPlayer[2]; // Adjust array size to hold two songs
   playList[0] = minim.loadFile("Crazy Dave (Intro Theme) _ Laura Shigihara.mp3"); // First song
-  playList[1] = minim.loadFile("pvz_music_player\\Loonboon _ Laura Shigihara.mp3"); // Second song
+  playList[1] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Second song
   playList[currentSongIndex].play(); // Start with the first song
 } //End setup
 //
@@ -162,9 +163,10 @@ void mousePressed() {
   }
   if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 150 && mouseY <= appHeight - 110) {
     // Next Song
-    playList[currentSongIndex].close();
+    playList[currentSongIndex].pause(); // Stop the current song
+    playList[currentSongIndex].rewind();
     currentSongIndex = (currentSongIndex + 1) % playList.length; // Switch to the next song
-    playList[currentSongIndex].play();
+    playList[currentSongIndex].play(); // Play the next song
   }
   if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 100 && mouseY <= appHeight - 60) {
     // Previous Song
@@ -175,7 +177,7 @@ void mousePressed() {
   if (mouseX >= 350 && mouseX <= 450 && mouseY >= appHeight - 300 && mouseY <= appHeight - 260) {
     // Shuffle
     playList[currentSongIndex].close();
-    playList[currentSongIndex] = minim.loadFile("RandomSong.mp3"); // Replace with actual shuffle logic
+    playList[currentSongIndex] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Replace with actual shuffle logic
     playList[currentSongIndex].play();
   }
   if (mouseX >= 350 && mouseX <= 450 && mouseY >= appHeight - 250 && mouseY <= appHeight - 210) {

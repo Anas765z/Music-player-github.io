@@ -9,7 +9,7 @@ import ddf.minim.ugens.*;
 //
 //Library - Minim
 Minim minim;
-AudioPlayer[] playList; // Adjust array size to hold two songs
+AudioPlayer[] playList; // Adjust array size to hold four songs
 int currentSongIndex = 0; // Index of the currently playing song
 //
 //Global Variables
@@ -60,13 +60,23 @@ void setup() {
   //Prototype Images
   // Initialize Minim
   minim = new Minim(this);
-  playList = new AudioPlayer[2]; // Adjust array size to hold two songs
+  playList = new AudioPlayer[4]; // Adjust array size to hold four songs
   playList[0] = minim.loadFile("Crazy Dave (Intro Theme) _ Laura Shigihara.mp3"); // First song
   playList[1] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Second song
+  playList[2] = minim.loadFile("▶︎ Ultimate Battle _ Laura Shigihara.mp3"); // Third song
+  playList[3] = minim.loadFile("Zen Garden IN-GAME _ Laura Shigihara.mp3"); // Fourth song
   playList[currentSongIndex].play(); // Start with the first song
 } //End setup
 //
 void draw() {
+  // Draw title box
+  fill(0, 128, 0); // Green background for the title box
+  rect(appWidth / 2 - 150, 20, 300, 50); // Centered box at the top
+  fill(255); // White text
+  textAlign(CENTER, CENTER);
+  textSize(20);
+  text("Plants Vs Zombies MP", appWidth / 2, 45);
+
   image(myFirstImage, imageDivX, imageDivY, imageWidthChanged, imageHeightChanged); // Display image with corrected dimensions
 
   // Draw buttons
@@ -129,6 +139,11 @@ void draw() {
   rect(350, appHeight - 250, 100, 40);
   fill(255);
   text("Exit", 400, appHeight - 230);
+
+  fill(255, 20, 147); // Deep Pink for Ultimate Battle button
+  rect(350, appHeight - 200, 150, 40);
+  fill(255);
+  text("Ultimate Battle", 425, appHeight - 180);
 } //End draw
 //
 void mousePressed() {
@@ -182,6 +197,14 @@ void mousePressed() {
   }
   if (mouseX >= 350 && mouseX <= 450 && mouseY >= appHeight - 250 && mouseY <= appHeight - 210) {
     exit(); // Exit
+  }
+  if (mouseX >= 350 && mouseX <= 500 && mouseY >= appHeight - 200 && mouseY <= appHeight - 160) {
+    // Play "▶︎ Ultimate Battle _ Laura Shigihara.mp3"
+    playList[currentSongIndex].pause(); // Stop the current song
+    playList[currentSongIndex].rewind();
+    currentSongIndex = 2; // Set to the third song
+    playList[currentSongIndex] = minim.loadFile("▶︎ Ultimate Battle _ Laura Shigihara.mp3"); // Load the specific file
+    playList[currentSongIndex].play(); // Play the song
   }
 } //End mousePressed
 //

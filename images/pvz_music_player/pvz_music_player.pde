@@ -17,6 +17,24 @@ int appWidth, appHeight;
 float imageDivX, imageDivY, imageDivWidth, imageDivHeight;
 float imageWidthChanged=0.0, imageHeightChanged=0.0; //IN if-statement
 //
+// Button Layout Variables
+float beginningButtonSpace = 50;
+float buttonY;
+float widthOfButton = 100;
+
+// Button Dimensions and Positions
+float stopDivX, stopDivY, stopDivWidth, stopDivHeight;
+float muteDivX, muteDivY, muteDivWidth, muteDivHeight;
+float previousDivX, previousDivY, previousDivWidth, previousDivHeight;
+float fastRewindDivX, fastRewindDivY, fastRewindDivWidth, fastRewindDivHeight;
+float pauseDivX, pauseDivY, pauseDivWidth, pauseDivHeight;
+float playDivX, playDivY, playDivWidth, playDivHeight;
+float loopOnceDivX, loopOnceDivY, loopOnceDivWidth, loopOnceDivHeight;
+float loopInfiniteDivX, loopInfiniteDivY, loopInfiniteDivWidth, loopInfiniteDivHeight;
+float fastForwardDivX, fastForwardDivY, fastForwardDivWidth, fastForwardDivHeight;
+float nextDivX, nextDivY, nextDivWidth, nextDivHeight;
+float shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight;
+
 PImage myFirstImage;
 //
 void setup() {
@@ -66,6 +84,64 @@ void setup() {
   playList[2] = minim.loadFile("▶︎ Ultimate Battle _ Laura Shigihara.mp3"); // Third song
   playList[3] = minim.loadFile("Zen Garden IN-GAME _ Laura Shigihara.mp3"); // Fourth song
   playList[currentSongIndex].play(); // Start with the first song
+
+  // Button Layout Initialization
+  buttonY = appHeight - 300;
+
+  stopDivX = beginningButtonSpace;
+  stopDivY = buttonY;
+  stopDivWidth = widthOfButton;
+  stopDivHeight = widthOfButton;
+
+  muteDivX = beginningButtonSpace + widthOfButton * 1;
+  muteDivY = buttonY;
+  muteDivWidth = widthOfButton;
+  muteDivHeight = widthOfButton;
+
+  previousDivX = beginningButtonSpace + widthOfButton * 2;
+  previousDivY = buttonY;
+  previousDivWidth = widthOfButton;
+  previousDivHeight = widthOfButton;
+
+  fastRewindDivX = beginningButtonSpace + widthOfButton * 3;
+  fastRewindDivY = buttonY;
+  fastRewindDivWidth = widthOfButton;
+  fastRewindDivHeight = widthOfButton;
+
+  pauseDivX = beginningButtonSpace + widthOfButton * 4;
+  pauseDivY = buttonY;
+  pauseDivWidth = widthOfButton;
+  pauseDivHeight = widthOfButton;
+
+  playDivX = beginningButtonSpace + widthOfButton * 5;
+  playDivY = buttonY;
+  playDivWidth = widthOfButton;
+  playDivHeight = widthOfButton;
+
+  loopOnceDivX = beginningButtonSpace + widthOfButton * 6;
+  loopOnceDivY = buttonY;
+  loopOnceDivWidth = widthOfButton;
+  loopOnceDivHeight = widthOfButton;
+
+  loopInfiniteDivX = beginningButtonSpace + widthOfButton * 7;
+  loopInfiniteDivY = buttonY;
+  loopInfiniteDivWidth = widthOfButton;
+  loopInfiniteDivHeight = widthOfButton;
+
+  fastForwardDivX = beginningButtonSpace + widthOfButton * 8;
+  fastForwardDivY = buttonY;
+  fastForwardDivWidth = widthOfButton;
+  fastForwardDivHeight = widthOfButton;
+
+  nextDivX = beginningButtonSpace + widthOfButton * 9;
+  nextDivY = buttonY;
+  nextDivWidth = widthOfButton;
+  nextDivHeight = widthOfButton;
+
+  shuffleDivX = beginningButtonSpace + widthOfButton * 10;
+  shuffleDivY = buttonY;
+  shuffleDivWidth = widthOfButton;
+  shuffleDivHeight = widthOfButton;
 } //End setup
 //
 void draw() {
@@ -79,132 +155,111 @@ void draw() {
 
   image(myFirstImage, imageDivX, imageDivY, imageWidthChanged, imageHeightChanged); // Display image with corrected dimensions
 
-  // Draw buttons
-  fill(0, 255, 0); // Green for Play
-  rect(50, appHeight - 300, 100, 40);
-  fill(255);
-  text("Play", 100, appHeight - 280);
-
-  fill(255, 0, 0); // Red for Pause
-  rect(50, appHeight - 250, 100, 40);
-  fill(255);
-  text("Pause", 100, appHeight - 230);
-
+  // Draw buttons using dynamic positions
   fill(0); // Black for Stop
-  rect(50, appHeight - 200, 100, 40);
+  rect(stopDivX, stopDivY, stopDivWidth, stopDivHeight);
   fill(255);
-  text("Stop", 100, appHeight - 180);
-
-  fill(0, 0, 255); // Blue for Loop Once
-  rect(50, appHeight - 150, 100, 40);
-  fill(255);
-  text("Loop Once", 100, appHeight - 130);
-
-  fill(0, 0, 128); // Dark Blue for Loop Infinite
-  rect(50, appHeight - 100, 100, 40);
-  fill(255);
-  text("Loop Infinite", 100, appHeight - 80);
-
-  fill(255, 165, 0); // Orange for Fast Forward
-  rect(200, appHeight - 300, 100, 40);
-  fill(255);
-  text("Fast Forward", 250, appHeight - 280);
-
-  fill(255, 140, 0); // Dark Orange for Fast Rewind
-  rect(200, appHeight - 250, 100, 40);
-  fill(255);
-  text("Fast Rewind", 250, appHeight - 230);
+  text("Stop", stopDivX + stopDivWidth / 2, stopDivY + stopDivHeight / 2);
 
   fill(128, 128, 128); // Gray for Mute
-  rect(200, appHeight - 200, 100, 40);
+  rect(muteDivX, muteDivY, muteDivWidth, muteDivHeight);
   fill(255);
-  text("Mute", 250, appHeight - 180);
-
-  fill(255, 255, 0); // Yellow for Next Song
-  rect(200, appHeight - 150, 100, 40);
-  fill(0);
-  text("Next Song", 250, appHeight - 130);
+  text("Mute", muteDivX + muteDivWidth / 2, muteDivY + muteDivHeight / 2);
 
   fill(255, 255, 0); // Yellow for Previous Song
-  rect(200, appHeight - 100, 100, 40);
+  rect(previousDivX, previousDivY, previousDivWidth, previousDivHeight);
   fill(0);
-  text("Previous Song", 250, appHeight - 80);
+  text("Previous", previousDivX + previousDivWidth / 2, previousDivY + previousDivHeight / 2);
+
+  fill(255, 140, 0); // Dark Orange for Fast Rewind
+  rect(fastRewindDivX, fastRewindDivY, fastRewindDivWidth, fastRewindDivHeight);
+  fill(255);
+  text("Rewind", fastRewindDivX + fastRewindDivWidth / 2, fastRewindDivY + fastRewindDivHeight / 2);
+
+  fill(255, 0, 0); // Red for Pause
+  rect(pauseDivX, pauseDivY, pauseDivWidth, pauseDivHeight);
+  fill(255);
+  text("Pause", pauseDivX + pauseDivWidth / 2, pauseDivY + pauseDivHeight / 2);
+
+  fill(0, 255, 0); // Green for Play
+  rect(playDivX, playDivY, playDivWidth, playDivHeight);
+  fill(255);
+  text("Play", playDivX + playDivWidth / 2, playDivY + playDivHeight / 2);
+
+  fill(0, 0, 255); // Blue for Loop Once
+  rect(loopOnceDivX, loopOnceDivY, loopOnceDivWidth, loopOnceDivHeight);
+  fill(255);
+  text("Loop Once", loopOnceDivX + loopOnceDivWidth / 2, loopOnceDivY + loopOnceDivHeight / 2);
+
+  fill(0, 0, 128); // Dark Blue for Loop Infinite
+  rect(loopInfiniteDivX, loopInfiniteDivY, loopInfiniteDivWidth, loopInfiniteDivHeight);
+  fill(255);
+  text("Loop Infinite", loopInfiniteDivX + loopInfiniteDivWidth / 2, loopInfiniteDivY + loopInfiniteDivHeight / 2);
+
+  fill(255, 165, 0); // Orange for Fast Forward
+  rect(fastForwardDivX, fastForwardDivY, fastForwardDivWidth, fastForwardDivHeight);
+  fill(255);
+  text("Fast Forward", fastForwardDivX + fastForwardDivWidth / 2, fastForwardDivY + fastForwardDivHeight / 2);
+
+  fill(255, 255, 0); // Yellow for Next Song
+  rect(nextDivX, nextDivY, nextDivWidth, nextDivHeight);
+  fill(0);
+  text("Next", nextDivX + nextDivWidth / 2, nextDivY + nextDivHeight / 2);
 
   fill(75, 0, 130); // Indigo for Shuffle
-  rect(350, appHeight - 300, 100, 40);
+  rect(shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight);
   fill(255);
-  text("Shuffle", 400, appHeight - 280);
-
-  fill(255, 0, 255); // Magenta for Exit
-  rect(350, appHeight - 250, 100, 40);
-  fill(255);
-  text("Exit", 400, appHeight - 230);
-
-  fill(255, 20, 147); // Deep Pink for Ultimate Battle button
-  rect(350, appHeight - 200, 150, 40);
-  fill(255);
-  text("Ultimate Battle", 425, appHeight - 180);
+  text("Shuffle", shuffleDivX + shuffleDivWidth / 2, shuffleDivY + shuffleDivHeight / 2);
 } //End draw
 //
 void mousePressed() {
-  if (mouseX >= 50 && mouseX <= 150 && mouseY >= appHeight - 300 && mouseY <= appHeight - 260) {
-    playList[currentSongIndex].play(); // Play
-  }
-  if (mouseX >= 50 && mouseX <= 150 && mouseY >= appHeight - 250 && mouseY <= appHeight - 210) {
-    playList[currentSongIndex].pause(); // Pause
-  }
-  if (mouseX >= 50 && mouseX <= 150 && mouseY >= appHeight - 200 && mouseY <= appHeight - 160) {
+  if (mouseX >= stopDivX && mouseX <= stopDivX + stopDivWidth && mouseY >= stopDivY && mouseY <= stopDivY + stopDivHeight) {
     playList[currentSongIndex].pause();
     playList[currentSongIndex].rewind(); // Stop
   }
-  if (mouseX >= 50 && mouseX <= 150 && mouseY >= appHeight - 150 && mouseY <= appHeight - 110) {
-    playList[currentSongIndex].loop(1); // Loop Once
-  }
-  if (mouseX >= 50 && mouseX <= 150 && mouseY >= appHeight - 100 && mouseY <= appHeight - 60) {
-    playList[currentSongIndex].loop(); // Loop Infinite
-  }
-  if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 300 && mouseY <= appHeight - 260) {
-    playList[currentSongIndex].skip(10000); // Fast Forward
-  }
-  if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 250 && mouseY <= appHeight - 210) {
-    playList[currentSongIndex].skip(-10000); // Fast Rewind
-  }
-  if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 200 && mouseY <= appHeight - 160) {
+  if (mouseX >= muteDivX && mouseX <= muteDivX + muteDivWidth && mouseY >= muteDivY && mouseY <= muteDivY + muteDivHeight) {
     if (playList[currentSongIndex].isMuted()) {
       playList[currentSongIndex].unmute(); // Unmute
     } else {
       playList[currentSongIndex].mute(); // Mute
     }
   }
-  if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 150 && mouseY <= appHeight - 110) {
+  if (mouseX >= previousDivX && mouseX <= previousDivX + previousDivWidth && mouseY >= previousDivY && mouseY <= previousDivY + previousDivHeight) {
+    // Previous Song
+    playList[currentSongIndex].close();
+    currentSongIndex = (currentSongIndex - 1 + playList.length) % playList.length; // Switch to the previous song
+    playList[currentSongIndex].play();
+  }
+  if (mouseX >= fastRewindDivX && mouseX <= fastRewindDivX + fastRewindDivWidth && mouseY >= fastRewindDivY && mouseY <= fastRewindDivY + fastRewindDivHeight) {
+    playList[currentSongIndex].skip(-10000); // Fast Rewind
+  }
+  if (mouseX >= pauseDivX && mouseX <= pauseDivX + pauseDivWidth && mouseY >= pauseDivY && mouseY <= pauseDivY + pauseDivHeight) {
+    playList[currentSongIndex].pause(); // Pause
+  }
+  if (mouseX >= playDivX && mouseX <= playDivX + playDivWidth && mouseY >= playDivY && mouseY <= playDivY + playDivHeight) {
+    playList[currentSongIndex].play(); // Play
+  }
+  if (mouseX >= loopOnceDivX && mouseX <= loopOnceDivX + loopOnceDivWidth && mouseY >= loopOnceDivY && mouseY <= loopOnceDivY + loopOnceDivHeight) {
+    playList[currentSongIndex].loop(1); // Loop Once
+  }
+  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivY + loopInfiniteDivHeight) {
+    playList[currentSongIndex].loop(); // Loop Infinite
+  }
+  if (mouseX >= fastForwardDivX && mouseX <= fastForwardDivX + fastForwardDivWidth && mouseY >= fastForwardDivY && mouseY <= fastForwardDivY + fastForwardDivHeight) {
+    playList[currentSongIndex].skip(10000); // Fast Forward
+  }
+  if (mouseX >= nextDivX && mouseX <= nextDivX + nextDivWidth && mouseY >= nextDivY && mouseY <= nextDivY + nextDivHeight) {
     // Next Song
     playList[currentSongIndex].pause(); // Stop the current song
     playList[currentSongIndex].rewind();
     currentSongIndex = (currentSongIndex + 1) % playList.length; // Switch to the next song
     playList[currentSongIndex].play(); // Play the next song
   }
-  if (mouseX >= 200 && mouseX <= 300 && mouseY >= appHeight - 100 && mouseY <= appHeight - 60) {
-    // Previous Song
-    playList[currentSongIndex].close();
-    currentSongIndex = (currentSongIndex - 1 + playList.length) % playList.length; // Switch to the previous song
-    playList[currentSongIndex].play();
-  }
-  if (mouseX >= 350 && mouseX <= 450 && mouseY >= appHeight - 300 && mouseY <= appHeight - 260) {
+  if (mouseX >= shuffleDivX && mouseX <= shuffleDivX + shuffleDivWidth && mouseY >= shuffleDivY && mouseY <= shuffleDivY + shuffleDivHeight) {
     // Shuffle
     playList[currentSongIndex].close();
     playList[currentSongIndex] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Replace with actual shuffle logic
     playList[currentSongIndex].play();
-  }
-  if (mouseX >= 350 && mouseX <= 450 && mouseY >= appHeight - 250 && mouseY <= appHeight - 210) {
-    exit(); // Exit
-  }
-  if (mouseX >= 350 && mouseX <= 500 && mouseY >= appHeight - 200 && mouseY <= appHeight - 160) {
-    // Play "▶︎ Ultimate Battle _ Laura Shigihara.mp3"
-    playList[currentSongIndex].pause(); // Stop the current song
-    playList[currentSongIndex].rewind();
-    currentSongIndex = 2; // Set to the third song
-    playList[currentSongIndex] = minim.loadFile("▶︎ Ultimate Battle _ Laura Shigihara.mp3"); // Load the specific file
-    playList[currentSongIndex].play(); // Play the song
   }
 } //End mousePressed
 //

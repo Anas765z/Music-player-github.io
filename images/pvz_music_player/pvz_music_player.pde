@@ -9,7 +9,7 @@ import ddf.minim.ugens.*;
 //
 //Library - Minim
 Minim minim;
-AudioPlayer[] playList; // Adjust array size to hold four songs
+AudioPlayer[] playList; // Adjust array size to hold five songs
 int currentSongIndex = 0; // Index of the currently playing song
 //
 //Global Variables
@@ -82,12 +82,13 @@ void setup() {
   //Prototype Images
   // Initialize Minim
   minim = new Minim(this);
-  playList = new AudioPlayer[4]; // Adjust array size to hold four songs
+  playList = new AudioPlayer[5]; // Adjust array size to hold five songs
   try {
     playList[0] = minim.loadFile("Crazy Dave (Intro Theme) _ Laura Shigihara.mp3"); // First song
     playList[1] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Second song
     playList[2] = minim.loadFile("▶︎ Ultimate Battle _ Laura Shigihara.mp3"); // Third song
     playList[3] = minim.loadFile("Zen Garden IN-GAME _ Laura Shigihara.mp3"); // Fourth song
+    playList[4] = minim.loadFile("Plants Vs. Zombies 2 Music - Map.mp3"); // Fifth song
   } catch (Exception e) {
     println("Error: Audio file not found.");
     exit();
@@ -249,6 +250,8 @@ void mousePressed() {
       imagePath = "images/plants-vs-zombies-background-i7pf3vxoaxm1mhyw.jpg";
     } else if (currentSongIndex == 3) {
       imagePath = "images/OIP.jpg";
+    } else if (currentSongIndex == 4) {
+      imagePath = "images/2868226_orig - Copy.jpg"; // Updated fifth song image
     }
 
     PImage newImage = loadImage(imagePath);
@@ -267,13 +270,13 @@ void mousePressed() {
   if (mouseX >= playDivX && mouseX <= playDivX + playDivWidth && mouseY >= playDivY && mouseY <= playDivY + playDivHeight) {
     playList[currentSongIndex].play(); // Play
   }
-  if (mouseX >= loopOnceDivX && mouseX <= loopOnceDivX + loopOnceDivWidth && mouseY >= loopOnceDivY && mouseY <= loopOnceDivHeight) {
+  if (mouseX >= loopOnceDivX && mouseX <= loopOnceDivX + loopOnceDivWidth && mouseY >= loopOnceDivY && mouseY <= loopOnceDivY + loopOnceDivHeight) {
     playList[currentSongIndex].loop(1); // Loop Once
   }
-  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivHeight) {
+  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivY + loopInfiniteDivHeight) {
     playList[currentSongIndex].loop(); // Loop Infinite
   }
-  if (mouseX >= fastForwardDivX && mouseX <= fastForwardDivX + fastForwardDivWidth && mouseY >= fastForwardDivY && mouseY <= fastForwardDivHeight) {
+  if (mouseX >= fastForwardDivX && mouseX <= fastForwardDivX + fastForwardDivWidth && mouseY >= fastForwardDivY && mouseY <= fastForwardDivY + fastForwardDivHeight) {
     playList[currentSongIndex].skip(10000); // Fast Forward
   }
   if (mouseX >= nextDivX && mouseX <= nextDivX + nextDivWidth && mouseY >= nextDivY && mouseY <= nextDivY + nextDivHeight) {
@@ -293,6 +296,8 @@ void mousePressed() {
       imagePath = "images/plants-vs-zombies-background-i7pf3vxoaxm1mhyw.jpg";
     } else if (currentSongIndex == 3) {
       imagePath = "images/OIP.jpg";
+    } else if (currentSongIndex == 4) {
+      imagePath = "images/2868226_orig - Copy.jpg"; // Updated fifth song image
     }
 
     PImage newImage = loadImage(imagePath);
@@ -302,7 +307,7 @@ void mousePressed() {
       println("Error: Image not found at " + imagePath);
     }
   }
-  if (mouseX >= shuffleDivX && mouseX <= shuffleDivX + shuffleDivWidth && mouseY >= shuffleDivY && mouseY <= shuffleDivHeight) {
+  if (mouseX >= shuffleDivX && mouseX <= shuffleDivX + shuffleDivWidth && mouseY >= shuffleDivY && mouseY <= shuffleDivY + shuffleDivHeight) {
     // Shuffle
     playList[currentSongIndex].close();
     playList[currentSongIndex] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Replace with actual shuffle logic

@@ -34,8 +34,10 @@ float loopInfiniteDivX, loopInfiniteDivY, loopInfiniteDivWidth, loopInfiniteDivH
 float fastForwardDivX, fastForwardDivY, fastForwardDivWidth, fastForwardDivHeight;
 float nextDivX, nextDivY, nextDivWidth, nextDivHeight;
 float shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight;
+float quitDivX, quitDivY, quitDivWidth, quitDivHeight;
 
 PImage myFirstImage;
+PImage quitButtonImage;
 //
 void setup() {
   //Display
@@ -95,6 +97,13 @@ void setup() {
   }
   playList[currentSongIndex].play(); // Start with the first song
 
+  // Load the image for the Quit button
+  quitButtonImage = loadImage("images/OIP (1).jpg");
+  if (quitButtonImage == null) {
+    println("Error: Quit button image not found.");
+    exit();
+  }
+
   // Button Layout Initialization
   buttonY = appHeight - 300;
 
@@ -152,6 +161,11 @@ void setup() {
   shuffleDivY = buttonY;
   shuffleDivWidth = widthOfButton;
   shuffleDivHeight = widthOfButton;
+
+  quitDivX = beginningButtonSpace + widthOfButton * 11;
+  quitDivY = buttonY;
+  quitDivWidth = widthOfButton;
+  quitDivHeight = widthOfButton;
 } //End setup
 //
 void draw() {
@@ -220,6 +234,11 @@ void draw() {
   rect(shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight);
   fill(255);
   text("Shuffle", shuffleDivX + shuffleDivWidth / 2, shuffleDivY + shuffleDivHeight / 2);
+
+  // Draw the Quit button with the image
+  if (quitButtonImage != null) {
+    image(quitButtonImage, quitDivX, quitDivY, quitDivWidth, quitDivHeight);
+  }
 } //End draw
 //
 void mousePressed() {
@@ -273,7 +292,7 @@ void mousePressed() {
   if (mouseX >= loopOnceDivX && mouseX <= loopOnceDivX + loopOnceDivWidth && mouseY >= loopOnceDivY && mouseY <= loopOnceDivY + loopOnceDivHeight) {
     playList[currentSongIndex].loop(1); // Loop Once
   }
-  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivY + loopInfiniteDivHeight) {
+  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivHeight) {
     playList[currentSongIndex].loop(); // Loop Infinite
   }
   if (mouseX >= fastForwardDivX && mouseX <= fastForwardDivX + fastForwardDivWidth && mouseY >= fastForwardDivY && mouseY <= fastForwardDivY + fastForwardDivHeight) {
@@ -312,6 +331,9 @@ void mousePressed() {
     playList[currentSongIndex].close();
     playList[currentSongIndex] = minim.loadFile("Loonboon _ Laura Shigihara.mp3"); // Replace with actual shuffle logic
     playList[currentSongIndex].play();
+  }
+  if (mouseX >= quitDivX && mouseX <= quitDivX + quitDivWidth && mouseY >= quitDivY && mouseY <= quitDivY + quitDivHeight) {
+    exit(); // Quit the application
   }
 } //End mousePressed
 //

@@ -105,7 +105,7 @@ void setup() {
   }
 
   // Button Layout Initialization
-  buttonY = appHeight - 300;
+  buttonY = appHeight - 200; // Lower the buttons by increasing the Y position
 
   stopDivX = beginningButtonSpace;
   stopDivY = buttonY;
@@ -162,8 +162,9 @@ void setup() {
   shuffleDivWidth = widthOfButton;
   shuffleDivHeight = widthOfButton;
 
-  quitDivX = beginningButtonSpace + widthOfButton * 11;
-  quitDivY = buttonY;
+  // Position the Quit button at the top-left corner
+  quitDivX = 10; // Small margin from the left
+  quitDivY = 10; // Small margin from the top
   quitDivWidth = widthOfButton;
   quitDivHeight = widthOfButton;
 } //End setup

@@ -35,6 +35,7 @@ float fastForwardDivX, fastForwardDivY, fastForwardDivWidth, fastForwardDivHeigh
 float nextDivX, nextDivY, nextDivWidth, nextDivHeight;
 float shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight;
 float quitDivX, quitDivY, quitDivWidth, quitDivHeight;
+float unmuteDivX, unmuteDivY, unmuteDivWidth, unmuteDivHeight;
 
 PImage myFirstImage;
 PImage quitButtonImage;
@@ -167,6 +168,12 @@ void setup() {
   quitDivY = 10; // Small margin from the top
   quitDivWidth = widthOfButton;
   quitDivHeight = widthOfButton;
+
+  // Add Unmute button dimensions
+  unmuteDivX = beginningButtonSpace + widthOfButton * 12; // Position after the Quit button
+  unmuteDivY = buttonY;
+  unmuteDivWidth = widthOfButton;
+  unmuteDivHeight = widthOfButton;
 } //End setup
 //
 void draw() {
@@ -180,61 +187,77 @@ void draw() {
 
   image(myFirstImage, imageDivX, imageDivY, imageWidthChanged, imageHeightChanged); // Display image with corrected dimensions
 
-  // Draw buttons using dynamic positions
+  // Draw buttons using universally recognizable symbols
   fill(0); // Black for Stop
   rect(stopDivX, stopDivY, stopDivWidth, stopDivHeight);
   fill(255);
-  text("Stop", stopDivX + stopDivWidth / 2, stopDivY + stopDivHeight / 2);
+  rect(stopDivX + stopDivWidth / 2 - 20, stopDivY + stopDivHeight / 2 - 20, 40, 40); // Square for Stop (symbolizing a "stop" button)
 
   fill(128, 128, 128); // Gray for Mute
   rect(muteDivX, muteDivY, muteDivWidth, muteDivHeight);
   fill(255);
-  text("Mute", muteDivX + muteDivWidth / 2, muteDivY + muteDivHeight / 2);
+  triangle(muteDivX + 30, muteDivY + muteDivHeight / 2 - 20, muteDivX + 30, muteDivY + muteDivHeight / 2 + 20, muteDivX + 70, muteDivY + muteDivHeight / 2); // Speaker shape
+  line(muteDivX + 75, muteDivY + muteDivHeight / 2 - 15, muteDivX + 95, muteDivY + muteDivHeight / 2 + 15); // Diagonal line for "muted"
+
+  fill(0, 255, 255); // Cyan for Unmute
+  rect(unmuteDivX, unmuteDivY, unmuteDivWidth, unmuteDivHeight);
+  fill(0);
+  triangle(unmuteDivX + 30, unmuteDivY + unmuteDivHeight / 2 - 20, unmuteDivX + 30, unmuteDivY + unmuteDivHeight / 2 + 20, unmuteDivX + 70, unmuteDivY + unmuteDivHeight / 2); // Speaker shape
+  arc(unmuteDivX + 80, unmuteDivY + unmuteDivHeight / 2, 30, 30, -PI / 4, PI / 4); // Sound wave 1
+  arc(unmuteDivX + 100, unmuteDivY + unmuteDivHeight / 2, 50, 50, -PI / 4, PI / 4); // Sound wave 2
 
   fill(255, 255, 0); // Yellow for Previous Song
   rect(previousDivX, previousDivY, previousDivWidth, previousDivHeight);
   fill(0);
-  text("Previous", previousDivX + previousDivWidth / 2, previousDivY + previousDivHeight / 2);
+  triangle(previousDivX + 30, previousDivY + previousDivHeight / 2, previousDivX + 70, previousDivY + 20, previousDivX + 70, previousDivY + previousDivHeight - 20); // Triangle pointing left
+  rect(previousDivX + 10, previousDivY + previousDivHeight / 2 - 20, 10, 40); // Vertical bar for Previous
 
   fill(255, 140, 0); // Dark Orange for Fast Rewind
   rect(fastRewindDivX, fastRewindDivY, fastRewindDivWidth, fastRewindDivHeight);
   fill(255);
-  text("Rewind", fastRewindDivX + fastRewindDivWidth / 2, fastRewindDivY + fastRewindDivHeight / 2);
+  triangle(fastRewindDivX + 20, fastRewindDivY + fastRewindDivHeight / 2, fastRewindDivX + 50, fastRewindDivY + 10, fastRewindDivX + 50, fastRewindDivY + fastRewindDivHeight - 10); // Left triangle
+  triangle(fastRewindDivX + 50, fastRewindDivY + fastRewindDivHeight / 2, fastRewindDivX + 80, fastRewindDivY + 10, fastRewindDivX + 80, fastRewindDivY + fastRewindDivHeight - 10); // Right triangle
 
   fill(255, 0, 0); // Red for Pause
   rect(pauseDivX, pauseDivY, pauseDivWidth, pauseDivHeight);
   fill(255);
-  text("Pause", pauseDivX + pauseDivWidth / 2, pauseDivY + pauseDivHeight / 2);
+  rect(pauseDivX + pauseDivWidth / 2 - 20, pauseDivY + 20, 10, pauseDivHeight - 40); // Left bar for Pause
+  rect(pauseDivX + pauseDivWidth / 2 + 10, pauseDivY + 20, 10, pauseDivHeight - 40); // Right bar for Pause
 
   fill(0, 255, 0); // Green for Play
   rect(playDivX, playDivY, playDivWidth, playDivHeight);
   fill(255);
-  text("Play", playDivX + playDivWidth / 2, playDivY + playDivHeight / 2);
+  triangle(playDivX + 30, playDivY + 20, playDivX + 30, playDivY + playDivHeight - 20, playDivX + 70, playDivY + playDivHeight / 2); // Triangle pointing right for Play
 
   fill(0, 0, 255); // Blue for Loop Once
   rect(loopOnceDivX, loopOnceDivY, loopOnceDivWidth, loopOnceDivHeight);
   fill(255);
-  text("Loop Once", loopOnceDivX + loopOnceDivWidth / 2, loopOnceDivY + loopOnceDivHeight / 2);
+  arc(loopOnceDivX + loopOnceDivWidth / 2, loopOnceDivY + loopOnceDivHeight / 2, 60, 60, PI, TWO_PI); // Semi-circle for Loop Once
+  triangle(loopOnceDivX + loopOnceDivWidth / 2 + 20, loopOnceDivY + loopOnceDivHeight / 2 - 10, loopOnceDivX + loopOnceDivWidth / 2 + 30, loopOnceDivY + loopOnceDivHeight / 2, loopOnceDivX + loopOnceDivWidth / 2 + 20, loopOnceDivY + loopOnceDivHeight / 2 + 10); // Arrowhead
 
   fill(0, 0, 128); // Dark Blue for Loop Infinite
   rect(loopInfiniteDivX, loopInfiniteDivY, loopInfiniteDivWidth, loopInfiniteDivHeight);
   fill(255);
-  text("Loop Infinite", loopInfiniteDivX + loopInfiniteDivWidth / 2, loopInfiniteDivY + loopInfiniteDivHeight / 2);
+  ellipse(loopInfiniteDivX + loopInfiniteDivWidth / 2 - 20, loopInfiniteDivY + loopInfiniteDivHeight / 2, 30, 30); // Left circle for Loop Infinite
+  ellipse(loopInfiniteDivX + loopInfiniteDivWidth / 2 + 20, loopInfiniteDivY + loopInfiniteDivHeight / 2, 30, 30); // Right circle for Loop Infinite
 
   fill(255, 165, 0); // Orange for Fast Forward
   rect(fastForwardDivX, fastForwardDivY, fastForwardDivWidth, fastForwardDivHeight);
   fill(255);
-  text("Fast Forward", fastForwardDivX + fastForwardDivWidth / 2, fastForwardDivY + fastForwardDivHeight / 2);
+  triangle(fastForwardDivX + 30, fastForwardDivY + 20, fastForwardDivX + 30, fastForwardDivY + fastForwardDivHeight - 20, fastForwardDivX + 70, fastForwardDivY + fastForwardDivHeight / 2); // Triangle pointing right
+  triangle(fastForwardDivX + 70, fastForwardDivY + 20, fastForwardDivX + 70, fastForwardDivY + fastForwardDivHeight - 20, fastForwardDivX + 110, fastForwardDivY + fastForwardDivHeight / 2); // Second triangle for Fast Forward
 
   fill(255, 255, 0); // Yellow for Next Song
   rect(nextDivX, nextDivY, nextDivWidth, nextDivHeight);
   fill(0);
-  text("Next", nextDivX + nextDivWidth / 2, nextDivY + nextDivHeight / 2);
+  triangle(nextDivX + 30, nextDivY + 20, nextDivX + 30, nextDivY + nextDivHeight - 20, nextDivX + 70, nextDivY + nextDivHeight / 2); // Triangle pointing right
+  rect(nextDivX + 80, nextDivY + nextDivHeight / 2 - 20, 10, 40); // Vertical bar for Next
 
   fill(75, 0, 130); // Indigo for Shuffle
   rect(shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight);
   fill(255);
-  text("Shuffle", shuffleDivX + shuffleDivWidth / 2, shuffleDivY + shuffleDivHeight / 2);
+  line(shuffleDivX + 30, shuffleDivY + 30, shuffleDivX + 70, shuffleDivY + shuffleDivHeight - 30); // Diagonal line for Shuffle
+  line(shuffleDivX + 70, shuffleDivY + 30, shuffleDivX + 30, shuffleDivY + shuffleDivHeight - 30); // Cross line for Shuffle
 
   // Draw the Quit button with the image
   if (quitButtonImage != null) {
@@ -248,11 +271,10 @@ void mousePressed() {
     playList[currentSongIndex].rewind(); // Stop
   }
   if (mouseX >= muteDivX && mouseX <= muteDivX + muteDivWidth && mouseY >= muteDivY && mouseY <= muteDivY + muteDivHeight) {
-    if (playList[currentSongIndex].isMuted()) {
-      playList[currentSongIndex].unmute(); // Unmute
-    } else {
-      playList[currentSongIndex].mute(); // Mute
-    }
+    playList[currentSongIndex].mute(); // Mute
+  }
+  if (mouseX >= unmuteDivX && mouseX <= unmuteDivX + unmuteDivWidth && mouseY >= unmuteDivY && mouseY <= unmuteDivY + unmuteDivHeight) {
+    playList[currentSongIndex].unmute(); // Unmute the current song
   }
   if (mouseX >= previousDivX && mouseX <= previousDivX + previousDivWidth && mouseY >= previousDivY && mouseY <= previousDivY + previousDivHeight) {
     // Previous Song
@@ -293,7 +315,7 @@ void mousePressed() {
   if (mouseX >= loopOnceDivX && mouseX <= loopOnceDivX + loopOnceDivWidth && mouseY >= loopOnceDivY && mouseY <= loopOnceDivY + loopOnceDivHeight) {
     playList[currentSongIndex].loop(1); // Loop Once
   }
-  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivHeight) {
+  if (mouseX >= loopInfiniteDivX && mouseX <= loopInfiniteDivX + loopInfiniteDivWidth && mouseY >= loopInfiniteDivY && mouseY <= loopInfiniteDivY + loopInfiniteDivHeight) {
     playList[currentSongIndex].loop(); // Loop Infinite
   }
   if (mouseX >= fastForwardDivX && mouseX <= fastForwardDivX + fastForwardDivWidth && mouseY >= fastForwardDivY && mouseY <= fastForwardDivY + fastForwardDivHeight) {

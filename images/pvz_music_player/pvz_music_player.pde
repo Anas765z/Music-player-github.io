@@ -174,6 +174,10 @@ void setup() {
   unmuteDivY = buttonY;
   unmuteDivWidth = widthOfButton;
   unmuteDivHeight = widthOfButton;
+
+  // Calculate text font size based on aspect ratio
+  float aspectRatio = float(appWidth) / appHeight;
+  textSize(20 * aspectRatio); // Scale text size proportionally to the aspect ratio
 } //End setup
 //
 void draw() {
@@ -182,7 +186,6 @@ void draw() {
   rect(appWidth / 2 - 150, 20, 300, 50); // Centered box at the top
   fill(255); // White text
   textAlign(CENTER, CENTER);
-  textSize(20);
   text("Plants Vs Zombies MP", appWidth / 2, 45);
 
   image(myFirstImage, imageDivX, imageDivY, imageWidthChanged, imageHeightChanged); // Display image with corrected dimensions

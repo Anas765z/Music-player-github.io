@@ -363,12 +363,23 @@ void mousePressed() {
   }
 } //End mousePressed
 //
-void keyPressed() {
-  if (key == 'p') {
-    playList[currentSongIndex].play();  // Play audio on 'p' key press
+void playCurrentSong() {
+  if (playList[currentSongIndex] != null) {
+    playList[currentSongIndex].play();
   }
-  if (key == 's') {
-    playList[currentSongIndex].pause(); // Pause audio on 's' key press
+}
+
+void stopCurrentSong() {
+  if (playList[currentSongIndex] != null) {
+    playList[currentSongIndex].pause();
+  }
+}
+
+void keyPressed() {
+  if (key == 'p') { // Play current song
+    playCurrentSong();
+  } else if (key == 's') { // Stop current song
+    stopCurrentSong();
   }
 }
 //

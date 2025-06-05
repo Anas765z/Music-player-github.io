@@ -190,73 +190,87 @@ void draw() {
 
   image(myFirstImage, imageDivX, imageDivY, imageWidthChanged, imageHeightChanged); // Display image with corrected dimensions
 
-  // Draw buttons using universally recognizable symbols
-  fill(0); // Black for Stop
+  // Hover effect for Stop button
+  if (mouseX >= stopDivX && mouseX <= stopDivX + stopDivWidth && mouseY >= stopDivY && mouseY <= stopDivY + stopDivHeight) {
+    fill(200, 0, 0); // Darker red for hover
+  } else {
+    fill(0); // Black for default
+  }
   rect(stopDivX, stopDivY, stopDivWidth, stopDivHeight);
   fill(255);
   rect(stopDivX + stopDivWidth / 2 - 20, stopDivY + stopDivHeight / 2 - 20, 40, 40); // Square for Stop (symbolizing a "stop" button)
 
-  fill(128, 128, 128); // Gray for Mute
+  // Hover effect for Mute button
+  if (mouseX >= muteDivX && mouseX <= muteDivX + muteDivWidth && mouseY >= muteDivY && mouseY <= muteDivY + muteDivHeight) {
+    fill(100); // Darker gray for hover
+  } else {
+    fill(128, 128, 128); // Gray for default
+  }
   rect(muteDivX, muteDivY, muteDivWidth, muteDivHeight);
   fill(255);
   triangle(muteDivX + 30, muteDivY + muteDivHeight / 2 - 20, muteDivX + 30, muteDivY + muteDivHeight / 2 + 20, muteDivX + 70, muteDivY + muteDivHeight / 2); // Speaker shape
   line(muteDivX + 75, muteDivY + muteDivHeight / 2 - 15, muteDivX + 95, muteDivY + muteDivHeight / 2 + 15); // Diagonal line for "muted"
 
-  fill(0, 255, 255); // Cyan for Unmute
+  // Hover effect for Unmute button
+  if (mouseX >= unmuteDivX && mouseX <= unmuteDivX + unmuteDivWidth && mouseY >= unmuteDivY && mouseY <= unmuteDivY + unmuteDivHeight) {
+    fill(0, 150, 150); // Darker cyan for hover
+  } else {
+    fill(0, 255, 255); // Cyan for default
+  }
   rect(unmuteDivX, unmuteDivY, unmuteDivWidth, unmuteDivHeight);
   fill(0);
   triangle(unmuteDivX + 30, unmuteDivY + unmuteDivHeight / 2 - 20, unmuteDivX + 30, unmuteDivY + unmuteDivHeight / 2 + 20, unmuteDivX + 70, unmuteDivY + unmuteDivHeight / 2); // Speaker shape
   arc(unmuteDivX + 80, unmuteDivY + unmuteDivHeight / 2, 30, 30, -PI / 4, PI / 4); // Sound wave 1
   arc(unmuteDivX + 100, unmuteDivY + unmuteDivHeight / 2, 50, 50, -PI / 4, PI / 4); // Sound wave 2
 
-  fill(255, 255, 0); // Yellow for Previous Song
+  fill(200, 200, 0); // Darker yellow for Previous Song hover
   rect(previousDivX, previousDivY, previousDivWidth, previousDivHeight);
   fill(0);
   triangle(previousDivX + 30, previousDivY + previousDivHeight / 2, previousDivX + 70, previousDivY + 20, previousDivX + 70, previousDivY + previousDivHeight - 20); // Triangle pointing left
   rect(previousDivX + 10, previousDivY + previousDivHeight / 2 - 20, 10, 40); // Vertical bar for Previous
 
-  fill(255, 140, 0); // Dark Orange for Fast Rewind
+  fill(200, 100, 0); // Darker orange for Fast Rewind hover
   rect(fastRewindDivX, fastRewindDivY, fastRewindDivWidth, fastRewindDivHeight);
   fill(255);
   triangle(fastRewindDivX + 20, fastRewindDivY + fastRewindDivHeight / 2, fastRewindDivX + 50, fastRewindDivY + 10, fastRewindDivX + 50, fastRewindDivY + fastRewindDivHeight - 10); // Left triangle
   triangle(fastRewindDivX + 50, fastRewindDivY + fastRewindDivHeight / 2, fastRewindDivX + 80, fastRewindDivY + 10, fastRewindDivX + 80, fastRewindDivY + fastRewindDivHeight - 10); // Right triangle
 
-  fill(255, 0, 0); // Red for Pause
+  fill(200, 0, 0); // Darker red for Pause hover
   rect(pauseDivX, pauseDivY, pauseDivWidth, pauseDivHeight);
   fill(255);
   rect(pauseDivX + pauseDivWidth / 2 - 20, pauseDivY + 20, 10, pauseDivHeight - 40); // Left bar for Pause
   rect(pauseDivX + pauseDivWidth / 2 + 10, pauseDivY + 20, 10, pauseDivHeight - 40); // Right bar for Pause
 
-  fill(0, 255, 0); // Green for Play
+  fill(0, 200, 0); // Darker green for Play hover
   rect(playDivX, playDivY, playDivWidth, playDivHeight);
   fill(255);
   triangle(playDivX + 30, playDivY + 20, playDivX + 30, playDivY + playDivHeight - 20, playDivX + 70, playDivY + playDivHeight / 2); // Triangle pointing right for Play
 
-  fill(0, 0, 255); // Blue for Loop Once
+  fill(0, 0, 200); // Darker blue for Loop Once hover
   rect(loopOnceDivX, loopOnceDivY, loopOnceDivWidth, loopOnceDivHeight);
   fill(255);
   arc(loopOnceDivX + loopOnceDivWidth / 2, loopOnceDivY + loopOnceDivHeight / 2, 60, 60, PI, TWO_PI); // Semi-circle for Loop Once
   triangle(loopOnceDivX + loopOnceDivWidth / 2 + 20, loopOnceDivY + loopOnceDivHeight / 2 - 10, loopOnceDivX + loopOnceDivWidth / 2 + 30, loopOnceDivY + loopOnceDivHeight / 2, loopOnceDivX + loopOnceDivWidth / 2 + 20, loopOnceDivY + loopOnceDivHeight / 2 + 10); // Arrowhead
 
-  fill(0, 0, 128); // Dark Blue for Loop Infinite
+  fill(0, 0, 100); // Darker dark blue for Loop Infinite hover
   rect(loopInfiniteDivX, loopInfiniteDivY, loopInfiniteDivWidth, loopInfiniteDivHeight);
   fill(255);
   ellipse(loopInfiniteDivX + loopInfiniteDivWidth / 2 - 20, loopInfiniteDivY + loopInfiniteDivHeight / 2, 30, 30); // Left circle for Loop Infinite
   ellipse(loopInfiniteDivX + loopInfiniteDivWidth / 2 + 20, loopInfiniteDivY + loopInfiniteDivHeight / 2, 30, 30); // Right circle for Loop Infinite
 
-  fill(255, 165, 0); // Orange for Fast Forward
+  fill(200, 100, 0); // Darker orange for Fast Forward hover
   rect(fastForwardDivX, fastForwardDivY, fastForwardDivWidth, fastForwardDivHeight);
   fill(255);
   triangle(fastForwardDivX + 30, fastForwardDivY + 20, fastForwardDivX + 30, fastForwardDivY + fastForwardDivHeight - 20, fastForwardDivX + 70, fastForwardDivY + fastForwardDivHeight / 2); // Triangle pointing right
   triangle(fastForwardDivX + 70, fastForwardDivY + 20, fastForwardDivX + 70, fastForwardDivY + fastForwardDivHeight - 20, fastForwardDivX + 110, fastForwardDivY + fastForwardDivHeight / 2); // Second triangle for Fast Forward
 
-  fill(255, 255, 0); // Yellow for Next Song
+  fill(200, 200, 0); // Darker yellow for Next Song hover
   rect(nextDivX, nextDivY, nextDivWidth, nextDivHeight);
   fill(0);
   triangle(nextDivX + 30, nextDivY + 20, nextDivX + 30, nextDivY + nextDivHeight - 20, nextDivX + 70, nextDivY + nextDivHeight / 2); // Triangle pointing right
   rect(nextDivX + 80, nextDivY + nextDivHeight / 2 - 20, 10, 40); // Vertical bar for Next
 
-  fill(75, 0, 130); // Indigo for Shuffle
+  fill(50, 0, 100); // Darker indigo for Shuffle hover
   rect(shuffleDivX, shuffleDivY, shuffleDivWidth, shuffleDivHeight);
   fill(255);
   line(shuffleDivX + 30, shuffleDivY + 30, shuffleDivX + 70, shuffleDivY + shuffleDivHeight - 30); // Diagonal line for Shuffle
